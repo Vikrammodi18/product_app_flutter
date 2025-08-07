@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_tutorials/features/products/controller/category_controller.dart';
-import 'package:riverpod_tutorials/features/products/model/category_model.dart';
+
 
 class CategoriesButton extends ConsumerStatefulWidget {
   const CategoriesButton({super.key});

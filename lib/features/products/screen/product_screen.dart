@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:riverpod_tutorials/features/products/controller/category_controller.dart';
 import 'package:riverpod_tutorials/features/products/controller/product_controller.dart';
-import 'package:riverpod_tutorials/features/products/model/product_model.dart';
 import 'package:riverpod_tutorials/features/products/screen/widgets/Categories_button.dart';
 import 'package:riverpod_tutorials/features/products/screen/widgets/product_builder.dart';
-import 'package:riverpod_tutorials/features/products/screen/widgets/product_card.dart';
+
 
 class ProductScreen extends ConsumerStatefulWidget {
   const ProductScreen({super.key});

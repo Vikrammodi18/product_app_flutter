@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_tutorials/features/products/controller/product_controller.dart';
-import 'package:riverpod_tutorials/features/products/model/product_model.dart';
 
 class ProductDetailsScreen extends ConsumerWidget {
   final String id;
@@ -33,7 +32,7 @@ class ProductDetailsScreen extends ConsumerWidget {
 
                 // Title
                 Text(
-                  product.description!,
+                  product.title!,
                   style: const TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -118,8 +117,4 @@ class ProductDetailsScreen extends ConsumerWidget {
       ),
     );
   }
-}
-
-extension on AsyncValue<Product> {
-  void operator [](String other) {}
 }

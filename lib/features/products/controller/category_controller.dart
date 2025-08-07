@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_tutorials/features/products/model/category_model.dart';
 import 'package:riverpod_tutorials/features/products/model/product_model.dart';
