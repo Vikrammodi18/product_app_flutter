@@ -14,7 +14,7 @@ class _CategoriesButtonState extends ConsumerState<CategoriesButton> {
   @override
   Widget build(BuildContext context) {
     final categoryList = ref.watch(categoryProvider);
-    final selectedCategory = ref.watch(selectedCategoryProvider);
+    final selectedCategory = ref.read(selectedCategoryProvider);
 
     return categoryList.when(
       data: (categories) {
@@ -27,7 +27,7 @@ class _CategoriesButtonState extends ConsumerState<CategoriesButton> {
             itemBuilder: (context, index) {
               final category = categories[index];
               final isSelected = selectedCategory == category.slug;
-              print(selectedCategory);
+              
               return ChoiceChip(
                 elevation: 5.0,
                 label: Text(category.name),
