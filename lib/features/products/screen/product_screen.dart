@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:riverpod_tutorials/features/products/controller/category_controller.dart';
 import 'package:riverpod_tutorials/features/products/controller/product_controller.dart';
 import 'package:riverpod_tutorials/features/products/model/product_model.dart';
 import 'package:riverpod_tutorials/features/products/screen/widgets/Categories_button.dart';
@@ -15,12 +16,14 @@ class ProductScreen extends ConsumerStatefulWidget {
 class _ProductScreenState extends ConsumerState<ProductScreen> {
   @override
   Widget build(BuildContext context) {
+    final categoryName = ref.watch(selectedCategoryProvider);
     final productData = ref.watch(productProvider);
+    final categoryProduct = ref.watch(categoryProductProvider(categoryName?? "beauty"));
     return Scaffold(
       appBar: AppBar(title: Text("Product List")),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-        child: productData.when(
+        child: categoryProduct.when(
           data: (product) {
             return Column(
               children: [

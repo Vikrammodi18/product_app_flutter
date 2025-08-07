@@ -48,7 +48,7 @@ class ProductDetailsScreen extends ConsumerWidget {
                   children: [
                     Chip(
                       label: Text(
-                        product.category?.name ?? "Unknown",
+                        product.category ?? "Unknown",
                         style: const TextStyle(color: Colors.white),
                       ),
                       backgroundColor: Colors.deepPurple,

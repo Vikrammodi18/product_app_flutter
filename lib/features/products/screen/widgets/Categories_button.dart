@@ -15,6 +15,7 @@ class _CategoriesButtonState extends ConsumerState<CategoriesButton> {
   Widget build(BuildContext context) {
     final categoryList = ref.watch(categoryProvider);
     final selectedCategory = ref.watch(selectedCategoryProvider);
+
     return categoryList.when(
       data: (categories) {
         return SizedBox(
@@ -25,15 +26,15 @@ class _CategoriesButtonState extends ConsumerState<CategoriesButton> {
             separatorBuilder: (_, __) => const SizedBox(width: 8),
             itemBuilder: (context, index) {
               final category = categories[index];
-              final isSelected = selectedCategory == category.name;
-
+              final isSelected = selectedCategory == category.slug;
+              print(selectedCategory);
               return ChoiceChip(
                 elevation: 5.0,
                 label: Text(category.name),
                 selected: isSelected,
                 onSelected: (_) {
                   ref.read(selectedCategoryProvider.notifier).state =
-                      category.name;
+                      category.slug;
                   // call your filtered product fetch function here
                 },
               );

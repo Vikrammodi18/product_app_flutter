@@ -1,13 +1,14 @@
 import 'dart:convert';
 
+import 'package:riverpod_tutorials/core/constant/api_endpoint.dart';
 import 'package:riverpod_tutorials/features/products/model/product_model.dart';
 import 'package:http/http.dart' as http;
 
 class ProductRepo {
-  final String baseurl = "https://dummyjson.com";
+  
   Future<ProductModel> fetchProduct() async {
     try {
-      final url = Uri.parse("$baseurl/products");
+      final url = Uri.parse("${ApiEndpoint.baseUrl}");
       final response = await http.get(url);
       if (response.statusCode == 200) {
         final decodedJson = json.decode(response.body);
@@ -24,7 +25,7 @@ class ProductRepo {
 
   Future<Product> FetchProductDetails({required String id}) async {
     try {
-      final url = Uri.parse("$baseurl/products/$id");
+      final url = Uri.parse("${ApiEndpoint.baseUrl}/$id");
       final response = await http.get(url);
       if (response.statusCode == 200) {
         final jsonresponse = json.decode(response.body);
