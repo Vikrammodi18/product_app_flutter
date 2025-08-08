@@ -18,7 +18,7 @@ class _ProductScreenState extends ConsumerState<ProductScreen> {
   Widget build(BuildContext context) {
     final categoryName = ref.watch(selectedCategoryProvider);
     // final productData = ref.watch(productProvider);
-    final searchQuery = ref.read(searchQueryProvider);
+    
 
     final categoryProduct = ref.watch(
       categoryProductProvider(categoryName ?? "beauty"),
@@ -30,28 +30,36 @@ class _ProductScreenState extends ConsumerState<ProductScreen> {
         child: Column(
           children: [
             SearchWidget(),
-            searchQuery.trim().isEmpty
-                ? Expanded(
-                    child: Column(
-                      children: [
-                        CategoriesButton(),
-                        categoryProduct.when(
-                          data: (product) {
-                            return Expanded(
-                              child: ProductBuilder(
-                                product: product.products ?? [],
-                              ),
-                            );
-                          },
-                          error: (error, stack) =>
-                              Center(child: Text("error : $error")),
-                          loading: () =>
-                              Center(child: CircularProgressIndicator()),
-                        ),
-                      ],
-                    ),
-                  )
-                : Expanded(child: SearchedProduct()),
+            
+            Consumer
+            (
+              
+              builder:(context,ref,_){
+                 final searchQuery = ref.watch(searchQueryProvider);
+                    return searchQuery.trim().isEmpty
+                  ? Expanded(
+                      child: Column(
+                        children: [
+                          CategoriesButton(),
+                          categoryProduct.when(
+                            data: (product) {
+                              return Expanded(
+                                child: ProductBuilder(
+                                  product: product.products ?? [],
+                                ),
+                              );
+                            },
+                            error: (error, stack) =>
+                                Center(child: Text("error : $error")),
+                            loading: () =>
+                                Center(child: CircularProgressIndicator()),
+                          ),
+                        ],
+                      ),
+                    )
+                  : Expanded(child: SearchedProduct());
+                  }
+            ),
           ],
         ),
       ),
