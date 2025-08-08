@@ -11,7 +11,19 @@ final productProvider = FutureProvider.autoDispose<ProductModel>((ref) async {
   return await repo.fetchProduct();
 });
 
-final productDetailProvider = FutureProvider.family<Product,String>((ref,id) async {
+final productDetailProvider = FutureProvider.family<Product, String>((
+  ref,
+  id,
+) async {
   final repo = ref.read(productRepoProvider);
-  return await repo.FetchProductDetails(id: id);
+  return await repo.fetchProductDetails(id: id);
 });
+
+final searchProductProvider = FutureProvider.family<ProductModel, String>((
+  ref,
+  items,
+) async {
+  final repo = ref.read(productRepoProvider);
+  return await repo.fetchSearchPrduct(items: items);
+});
+final searchQueryProvider = StateProvider<String>((ref) => "");
