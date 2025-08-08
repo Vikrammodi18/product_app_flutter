@@ -7,23 +7,23 @@ import 'package:riverpod_tutorials/features/products/screen/widgets/Categories_b
 import 'package:riverpod_tutorials/features/products/screen/widgets/product_builder.dart';
 import 'package:riverpod_tutorials/features/products/screen/widgets/search_widget.dart';
 
-class ProductScreen extends ConsumerStatefulWidget {
-  const ProductScreen({super.key});
+class CategoryScreen extends ConsumerStatefulWidget {
+  const CategoryScreen({super.key});
 
-  ConsumerState<ProductScreen> createState() => _ProductScreenState();
+  ConsumerState<CategoryScreen> createState() => _ProductScreenState();
 }
 
-class _ProductScreenState extends ConsumerState<ProductScreen> {
+class _ProductScreenState extends ConsumerState<CategoryScreen> {
   @override
   Widget build(BuildContext context) {
     final categoryName = ref.watch(selectedCategoryProvider);
-    final productData = ref.watch(productProvider);
+    // final productData = ref.watch(productProvider);
 
     final categoryProduct = ref.watch(
       categoryProductProvider(categoryName ?? "beauty"),
     );
     return Scaffold(
-      appBar: AppBar(title: Text("Product List")),
+      appBar: AppBar(title: Text("Category")),
       body: GestureDetector(
         onTap: () {
           FocusScope.of(context).unfocus();
@@ -41,8 +41,8 @@ class _ProductScreenState extends ConsumerState<ProductScreen> {
                       ? Expanded(
                           child: Column(
                             children: [
-                              // CategoriesButton(),
-                              productData.when(
+                              CategoriesButton(),
+                              categoryProduct.when(
                                 data: (product) {
                                   return Expanded(
                                     child: ProductBuilder(

@@ -38,6 +38,7 @@ dependencies:
   flutter_riverpod: ^2.6.1
   http: ^1.4.0
   go_router: ^16.1.0
+  convex_bottom_bar: ^3.2.0
 
 dev_dependencies:
   flutter_test:

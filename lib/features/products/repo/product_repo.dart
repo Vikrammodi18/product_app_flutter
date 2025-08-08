@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 class ProductRepo {
   Future<ProductModel> fetchProduct() async {
     try {
-      final url = Uri.parse("${ApiEndpoint.baseUrl}");
+      final url = Uri.parse("${ApiEndpoint.baseUrl}/?limit=50&skip=20");
       final response = await http.get(url);
       if (response.statusCode == 200) {
         final decodedJson = json.decode(response.body);
