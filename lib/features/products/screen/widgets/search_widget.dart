@@ -7,11 +7,9 @@ class SearchWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final searchController = TextEditingController();
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 3),
       child: TextFormField(
-        controller: searchController,
         decoration: InputDecoration(
           border: OutlineInputBorder(),
           hintText: "e.g. mobile",
