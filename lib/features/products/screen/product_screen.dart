@@ -18,49 +18,51 @@ class _ProductScreenState extends ConsumerState<ProductScreen> {
   Widget build(BuildContext context) {
     final categoryName = ref.watch(selectedCategoryProvider);
     // final productData = ref.watch(productProvider);
-    
 
     final categoryProduct = ref.watch(
       categoryProductProvider(categoryName ?? "beauty"),
     );
     return Scaffold(
       appBar: AppBar(title: Text("Product List")),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-        child: Column(
-          children: [
-            SearchWidget(),
-            
-            Consumer
-            (
-              
-              builder:(context,ref,_){
-                 final searchQuery = ref.watch(searchQueryProvider);
-                    return searchQuery.trim().isEmpty
-                  ? Expanded(
-                      child: Column(
-                        children: [
-                          CategoriesButton(),
-                          categoryProduct.when(
-                            data: (product) {
-                              return Expanded(
-                                child: ProductBuilder(
-                                  product: product.products ?? [],
-                                ),
-                              );
-                            },
-                            error: (error, stack) =>
-                                Center(child: Text("error : $error")),
-                            loading: () =>
-                                Center(child: CircularProgressIndicator()),
+      body: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).unfocus();
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+          child: Column(
+            children: [
+              SearchWidget(),
+
+              Consumer(
+                builder: (context, ref, _) {
+                  final searchQuery = ref.watch(searchQueryProvider);
+                  return searchQuery.trim().isEmpty
+                      ? Expanded(
+                          child: Column(
+                            children: [
+                              CategoriesButton(),
+                              categoryProduct.when(
+                                data: (product) {
+                                  return Expanded(
+                                    child: ProductBuilder(
+                                      product: product.products ?? [],
+                                    ),
+                                  );
+                                },
+                                error: (error, stack) =>
+                                    Center(child: Text("error : $error")),
+                                loading: () =>
+                                    Center(child: CircularProgressIndicator()),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    )
-                  : Expanded(child: SearchedProduct());
-                  }
-            ),
-          ],
+                        )
+                      : Expanded(child: SearchedProduct());
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
