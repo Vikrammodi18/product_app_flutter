@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:riverpod_tutorials/features/auth/controller/auth_controller.dart';
 
 class LoginScreen extends ConsumerWidget {
@@ -11,12 +12,12 @@ class LoginScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final authState = ref.watch(authProvider);
-
+   
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFF4facfe), Color(0xFF00f2fe)],
+            colors: [Color.fromARGB(255, 39, 154, 255), Color(0xFF00f2fe)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -124,6 +125,10 @@ class LoginScreen extends ConsumerWidget {
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(onPressed: (){
+        
+      },
+      child: Text("logout"),),
     );
   }
 }

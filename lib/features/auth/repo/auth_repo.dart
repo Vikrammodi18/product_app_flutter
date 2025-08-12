@@ -17,7 +17,7 @@ class AuthRepo {
         },
         body: jsonEncode(credentials),
       );
-      print(response.body);
+
       if (response.statusCode == 200) {
         final jsonResponse = jsonDecode(response.body);
         return UserModel.fromJson(jsonResponse);
