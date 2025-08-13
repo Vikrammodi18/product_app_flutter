@@ -125,10 +125,7 @@ class LoginScreen extends ConsumerWidget {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(onPressed: (){
-        
-      },
-      child: Text("logout"),),
+    
     );
   }
 }

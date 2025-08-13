@@ -2,18 +2,20 @@ import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:riverpod_tutorials/features/products/screen/cart_screen.dart';
+import 'package:riverpod_tutorials/features/auth/controller/auth_controller.dart';
+import 'package:riverpod_tutorials/features/cart/screen/cart_screen.dart';
+
 import 'package:riverpod_tutorials/features/products/screen/category_screen.dart';
 import 'package:riverpod_tutorials/features/products/screen/product_screen.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends ConsumerState<HomeScreen> {
   int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -41,7 +43,12 @@ class _HomeScreenState extends State<HomeScreen> {
           });
         },
       ),
-      
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          ref.read(authProvider.notifier).logout();
+        },
+        child: Icon(Icons.logout),
+      ),
     );
   }
 }

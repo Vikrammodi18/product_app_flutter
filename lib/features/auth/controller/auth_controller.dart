@@ -9,6 +9,7 @@ final authRepoProvider = Provider<AuthRepo>((ref) {
 
 class AuthNotifier extends StateNotifier<AsyncValue<UserModel>> {
   final AuthRepo _authRepo;
+
   AuthNotifier(this._authRepo)
     : super(
         const AsyncValue.data(
@@ -30,17 +31,32 @@ class AuthNotifier extends StateNotifier<AsyncValue<UserModel>> {
     try {
       final user = await _authRepo.postApiRequest(credentials);
       print(user);
-      PreferenceManager.instance.saveAccessToken(user.accessToken);
-      final AccessToken = PreferenceManager.instance.getAccessToken();
-      print("savedAccessToken ____$AccessToken");
       state = AsyncValue.data(user);
+      PreferenceManager.instance.saveAccessToken(user.accessToken);
     } catch (e, st) {
       state = AsyncValue.error(e, st);
     }
   }
 
- 
+  Future<void> logout() async {
+    await _authRepo.logout();
+    state = AsyncValue.data(
+      UserModel(
+        accessToken: "",
+        firstName: "",
+        id: 0,
+        username: '',
+        email: '',
+        lastName: '',
+        gender: '',
+        image: '',
+        refreshToken: '',
+      ),
+    );
+  }
 }
+
+// final isToken = StateProvider<bool>((ref) => false);
 
 final authProvider = StateNotifierProvider<AuthNotifier, AsyncValue<UserModel>>(
   (ref) => AuthNotifier(ref.watch(authRepoProvider)),
